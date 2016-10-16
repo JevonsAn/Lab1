@@ -37,10 +37,6 @@ class Chuli{
     	var=new Vector<String>(4);
     	fuzhi=new Fuzhi();
     }
-//²»Ö§³Ö¿Õ¸ñºÍtab»ìºÏ£¬²»Ö§³Ö±äÁ¿Ö®¼äµÄÃÝ   
-//µÚÒ»¸ö²»ÄÜÊÇ-ºÅ
-//²»ÄÜ³¬¹ýintÉÏÏÞ
-//0^0
     public boolean judge(String str){
     	if (str.charAt(0)=='!'){
     		if (str.startsWith("!simplify ")){
