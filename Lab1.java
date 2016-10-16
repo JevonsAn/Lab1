@@ -2,6 +2,7 @@ import java.io.*;
 import java.lang.String;
 import java.util.Vector;
 import java.lang.Integer;
+//鎴戠殑娉ㄩ噴
 public class Lab1 {
     public static void main(String[] args) throws IOException{
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -35,9 +36,9 @@ class Chuli{
     	var=new Vector<String>(4);
     	fuzhi=new Fuzhi();
     }
-//不支持空格和tab混合，不支持变量之间的幂   
-//第一个不能是-号
-//不能超过int上限
+//虏禄脰搂鲁脰驴脮赂帽潞脥tab禄矛潞脧拢卢虏禄脰搂鲁脰卤盲脕驴脰庐录盲碌脛脙脻   
+//碌脷脪禄赂枚虏禄脛脺脢脟-潞脜
+//虏禄脛脺鲁卢鹿媒int脡脧脧脼
 //0^0
     public boolean judge(String str){
     	if (str.charAt(0)=='!'){
@@ -191,7 +192,7 @@ class Chuli{
 	    			}
 	        		if (indexfu2!=-1 && fuhao(strArray[i].charAt(indexfu2))==1)
 	        		{
-	    	    		//添乘号
+	    	    		//脤铆鲁脣潞脜
 	    	    		String newstr=new String();
 	    	    		newstr=strArray[i].substring(0, indexfu2);
 	    	    		newstr+="*";
@@ -251,7 +252,7 @@ class Chuli{
 	    						var.addElement(zan[0]);
 	    					}
 	    					int index=dxshi[i].var.indexOf(zan[0]);
-	    					//幂运算
+	    					//脙脻脭脣脣茫
 	    					int ci=1;
 	    					if (zan.length==2)
 	    						ci=Integer.parseInt(zan[1]);
