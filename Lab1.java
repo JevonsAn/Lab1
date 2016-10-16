@@ -1,8 +1,9 @@
-import java.io.*;
+﻿import java.io.*;
 import java.lang.String;
 import java.util.Vector;
 import java.lang.Integer;
 //我的注释
+//改一改
 public class Lab1 {
     public static void main(String[] args) throws IOException{
         InputStreamReader isr = new InputStreamReader(System.in);
