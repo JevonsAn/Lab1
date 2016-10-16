@@ -3,7 +3,6 @@ import java.lang.String;
 import java.util.Vector;
 import java.lang.Integer;
 //我的注释
-//改一改
 public class Lab1 {
     public static void main(String[] args) throws IOException{
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -37,10 +36,6 @@ class Chuli{
     	var=new Vector<String>(4);
     	fuzhi=new Fuzhi();
     }
-//²»Ö§³Ö¿Õ¸ñºÍtab»ìºÏ£¬²»Ö§³Ö±äÁ¿Ö®¼äµÄÃÝ   
-//µÚÒ»¸ö²»ÄÜÊÇ-ºÅ
-//²»ÄÜ³¬¹ýintÉÏÏÞ
-//0^0
     public boolean judge(String str){
     	if (str.charAt(0)=='!'){
     		if (str.startsWith("!simplify ")){
