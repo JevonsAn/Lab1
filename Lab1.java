@@ -5,7 +5,9 @@ package lab;
 
 
 
+
 // 5th change
+
 
 //
 //2nd change
@@ -14,11 +16,14 @@ package lab;
 //
 //3rd change
 
+<<<<<<< HEAD
 
 //
 //4th change
 
 
+=======
+>>>>>>> B2
 import java.io.*;
 import java.lang.String;
 import java.util.Vector;
