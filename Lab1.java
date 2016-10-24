@@ -1,147 +1,148 @@
 import java.io.*;
+import java.lang.Integer;
 import java.lang.String;
 import java.util.Vector;
-import java.lang.Integer;
-//æˆ‘çš„æ³¨é‡Š
+
+
 public class Lab1 {
-    public static void main(String[] args) throws IOException{
-        InputStreamReader isr = new InputStreamReader(System.in);
-        BufferedReader reader = new BufferedReader(isr);
-        System.out.print(">");
-        String s;
-        Chuli a=new Chuli();
-        while( (s = reader.readLine()) != null )  
-        {      	
-        	if (!a.judge(s)){
-        		System.out.println("Input Error!");
-        	}
-        	else {        
-        		if (s.charAt(0)!='!')
-        		{	a=new Chuli();
-        			s=s.replaceAll(" ","");
-        			s=s.replaceAll("	","");}
-        		a.expression(s);
-        		a.simplify(s);        		
-        	}
-        	System.out.print("\n>");
+  public static void main(String[] args) throws IOException {
+    InputStreamReader isr = new InputStreamReader(System.in);
+    BufferedReader reader = new BufferedReader(isr);
+    System.out.print(">");
+    String s;
+    Chuli a = new Chuli();
+    while( (s = reader.readLine()) != null ) {
+      if (!a.judge(s)) {
+        System.out.println("Input Error!");
+      }
+      else {
+        if (s.charAt(0)!='!') {
+          a = new Chuli();
+          s = s.replaceAll(" ","");
+          s = s.replaceAll("	","");
         }
+        a.expression(s);
+        a.simplify(s);
+      }
+      System.out.print("\n>");
     }
+  }
 }
 class Chuli{
-	Xiang dxshi[];
-	Fuzhi fuzhi;
-	Vector<String> var;
-	int len;
-    public Chuli(){
-    	var=new Vector<String>(4);
-    	fuzhi=new Fuzhi();
-    }
-//Â²Â»Ã–Â§Â³Ã–Â¿Ã•Â¸Ã±ÂºÃtabÂ»Ã¬ÂºÃÂ£Â¬Â²Â»Ã–Â§Â³Ã–Â±Ã¤ÃÂ¿Ã–Â®Â¼Ã¤ÂµÃ„ÃƒÃ   
-//ÂµÃšÃ’Â»Â¸Ã¶Â²Â»Ã„ÃœÃŠÃ‡-ÂºÃ…
-//Â²Â»Ã„ÃœÂ³Â¬Â¹Ã½intÃ‰ÃÃÃ
-//0^0
-    public boolean judge(String str){
-    	if (str.charAt(0)=='!'){
-    		if (str.startsWith("!simplify ")){
-    			fuzhi.var=new Vector<String>();
-    			fuzhi.zhi=new Vector<Integer>();
-    			String sub=str.substring(10);
-    			String ss[]=sub.split(" ");   
-    			for (int i=0;i<ss.length;i++){
-    				int denghao=ss[i].indexOf("=");
-    				if (ss[i].length()==0)
-    					continue;
-    				if (denghao>=ss[i].length()-1 || denghao<=0){    					
-    					return false;
-    				}    					
-    				else{
-    					if (var.indexOf(ss[i].substring(0,denghao))==-1 ){
-    						
-    					}
-    					else{
-    						fuzhi.var.addElement(ss[i].substring(0,denghao));
-    						fuzhi.zhi.addElement(Integer.parseInt(ss[i].substring(denghao+1)));
-    					}
-    				}
-    			}    			 
+  Xiang dxshi[];
+  Fuzhi fuzhi;
+  Vector<String> var;
+  int len;
+  public Chuli(){
+    var=new Vector<String>(4);
+    fuzhi=new Fuzhi();
+  }
+  //²»Ö§³Ö¿Õ¸ñºÍtab»ìºÏ£¬²»Ö§³Ö±äÁ¿Ö®¼äµÄÃİ   
+  //µÚÒ»¸ö²»ÄÜÊÇ-ºÅ
+  //²»ÄÜ³¬¹ıintÉÏÏŞ
+  //0^0
+  public boolean judge(String str){
+    if (str.charAt(0)=='!'){
+      if (str.startsWith("!simplify ")){
+        fuzhi.var=new Vector<String>();
+        fuzhi.zhi=new Vector<Integer>();
+        String sub=str.substring(10);
+        String ss[]=sub.split(" ");   
+        for (int i = 0; i < ss.length; i++) {
+          int denghao=ss[i].indexOf("=");
+          if (ss[i].length()==0)
+    		continue;
+    	  if (denghao>=ss[i].length()-1 || denghao<=0){
+    		return false;
+    	  }
+    	  else{
+    	    if (var.indexOf(ss[i].substring(0,denghao))==-1 ){
+
+    	    }
+    		else{
+    		  fuzhi.var.addElement(ss[i].substring(0,denghao));
+    		  fuzhi.zhi.addElement(Integer.parseInt(ss[i].substring(denghao+1)));
     		}
-    		else if(str.startsWith("!d/d ")){
-    			String sub=str.substring(5);
-    			if (var.indexOf(sub)==-1 ){
-    				sub=sub.replaceAll(" ","");
-        			sub=sub.replaceAll("	","");
-        			if (sub.length()==0)
-        				return false;
-        			if (fuhao(sub.charAt(0))!=1)
-        				return false;
-        			if (sub.length()>=2)
-	        			for (int q=1;q<sub.length();q++)
-	        				if (fuhao(sub.charAt(q))!=0 && fuhao(sub.charAt(q))!=1)
-	        					return false;
-					System.out.println(0);
-				}
-    			else{
-    				derivative(sub);    				
-    			}
-    		}
+    	  }
     	}
+      }
+      else if(str.startsWith("!d/d ")) {
+    	String sub=str.substring(5);
+    	if (var.indexOf(sub)==-1 ){
+    	  sub=sub.replaceAll(" ","");
+          sub=sub.replaceAll("	","");
+          if (sub.length()==0)
+        	return false;
+          if (fuhao(sub.charAt(0))!=1)
+        	return false;
+          if (sub.length()>=2)
+	        for (int q=1;q<sub.length();q++)
+	          if (fuhao(sub.charAt(q))!=0 && fuhao(sub.charAt(q))!=1)
+	        	return false;
+		  System.out.println(0);
+		}
     	else {
-    		str=str.replaceAll("	", "");
-        	str=str.replace(" ","");
-        	Vector<Integer> indexfang=new Vector<Integer>();
-	    	int flag=3;
-	    	for (int i=0;i<str.length();i++){
-	    		if (flag==1){
-	    			if (fuhao(str.charAt(i))==-1)	return false;
-	    			else if (fuhao(str.charAt(i))==0) 	flag=1;
-	    			else if(fuhao(str.charAt(i))==2)	flag=3;
-	    			else if(fuhao(str.charAt(i))==1)	flag=2;
-	    			else if(fuhao(str.charAt(i))==3)	flag=4;
-	    		}
-	    		else if(flag==2){
-	    			if (fuhao(str.charAt(i))==-1)	return false;
-	    			else if(fuhao(str.charAt(i))==2)	flag=3;
-	    			else if (fuhao(str.charAt(i))==0) 	flag=1;
-	    			else if(fuhao(str.charAt(i))==1)	flag=2;
-	    			else if(fuhao(str.charAt(i))==3)	flag=4;
-	    			else return false;
-	    		}
-	    		else if (flag==3){
-	    			if (fuhao(str.charAt(i))==-1)	return false;
-	    			else 
-	    			if (fuhao(str.charAt(i))==0) 	flag=1;
-	    			else if(fuhao(str.charAt(i))==1)	flag=2;
-	    			else return false;
-	    		}
-	    		else if (flag==4){
-	    			if (fuhao(str.charAt(i))==-1)	return false;
-	    			else {
-		    			indexfang.addElement(i-1);
-		    			if (fuhao(str.charAt(i))==0) 	flag=1;
-		    			else return false;
-	    			}
-	    		}	    		
-	    	}
-	    	if (flag==3 || flag==4){
-	    		return false;
-	    	}
-    		for (int j=0;j<indexfang.size();j++){
-    			int w=indexfang.elementAt(j)+1;
-    			while(fuhao(str.charAt(w))==0){
-    				w++;
-    				if (w>=str.length()){
-    					break;
-    				}
-    			}
-    			if (w>=str.length()){
-					break;
-				}
-    			if (fuhao(str.charAt(w))!=2 && fuhao(str.charAt(w))!=3)
-    				return false;
-    		}
-    	}   	
-    	return true;
+    	  derivative(sub);
+    	}
+      }
     }
+    else {
+      str=str.replaceAll("	", "");
+      str=str.replace(" ","");
+      Vector<Integer> indexfang=new Vector<Integer>();
+	  int flag=3;
+	  for (int i=0;i<str.length();i++){
+	    if (flag==1){
+	      if (fuhao(str.charAt(i))==-1)	return false;
+	      else if (fuhao(str.charAt(i))==0) 	flag=1;
+	      else if(fuhao(str.charAt(i))==2)	flag=3;
+	      else if(fuhao(str.charAt(i))==1)	flag=2;
+	      else if(fuhao(str.charAt(i))==3)	flag=4;
+	    }
+	    else if(flag==2){
+	      if (fuhao(str.charAt(i))==-1)	return false;
+	      else if(fuhao(str.charAt(i))==2)	flag=3;
+	      else if (fuhao(str.charAt(i))==0) 	flag=1;
+	      else if(fuhao(str.charAt(i))==1)	flag=2;
+	      else if(fuhao(str.charAt(i))==3)	flag=4;
+	      else return false;
+	    }
+	    else if (flag==3){
+	      if (fuhao(str.charAt(i))==-1)	return false;
+	      else 
+	    	if (fuhao(str.charAt(i))==0) 	flag=1;
+	    	else if(fuhao(str.charAt(i))==1)	flag=2;
+	    	else return false;
+	    }
+	    else if (flag==4){
+	      if (fuhao(str.charAt(i))==-1)	return false;
+	      else {
+		    indexfang.addElement(i-1);
+		      if (fuhao(str.charAt(i))==0) 	flag=1;
+		      else return false;
+	      }
+	    }
+	  }
+	  if (flag==3 || flag==4){
+	    return false;
+	  }
+      for (int j=0;j<indexfang.size();j++){
+    	int w=indexfang.elementAt(j)+1;
+    	while(fuhao(str.charAt(w))==0){
+    	  w++;
+    	  if (w>=str.length()){
+    		break;
+    	  }
+    	}
+    	if (w>=str.length()){
+		  break;
+		}
+    	if (fuhao(str.charAt(w))!=2 && fuhao(str.charAt(w))!=3)
+    	  return false;
+    	}
+      }
+      return true;
+  }
     public int strtoint(String str){
     	int weishu=str.length();
 		int x=0;
@@ -157,7 +158,8 @@ class Chuli{
     	}
     	else if (str.indexOf("0^0")!=-1)
     		System.out.println("Input Error!");
-    	else {    		
+    	else {
+
     		String[] strArray=str.split("\\+|-");
     		len=strArray.length;
     		dxshi=new Xiang[len];
@@ -192,17 +194,16 @@ class Chuli{
 	    			}
 	        		if (indexfu2!=-1 && fuhao(strArray[i].charAt(indexfu2))==1)
 	        		{
-	    	    		//ÃŒÃ­Â³Ã‹ÂºÃ…
+	    	    		//Ìí³ËºÅ
 	    	    		String newstr=new String();
 	    	    		newstr=strArray[i].substring(0, indexfu2);
 	    	    		newstr+="*";
-	    	    		newstr+=strArray[i].substring(indexfu2, strArray[i].length());	    		
+	    	    		newstr+=strArray[i].substring(indexfu2, strArray[i].length());
 	    	    		strArray[i]=newstr;
 	        		}
     			}
     			array[i]=strArray[i].split("\\*");
     		}
-    		   		
     		for (int i=0;i<len;i++){
     			//System.out.println("len:"+array[i].length);
     			for (int j=0;j<array[i].length;j++){
@@ -223,7 +224,6 @@ class Chuli{
 	    						int yuan=dxshi[i].mi.elementAt(index);
 	    						dxshi[i].mi.setElementAt(yuan+1,index);
 	    					}
-	    						
 	    				}
 	    				else if(fuhao(array[i][j].charAt(0))==0 && array[i][j].length()!=0){
 	    					int weishu=array[i][j].length();
@@ -252,7 +252,7 @@ class Chuli{
 	    						var.addElement(zan[0]);
 	    					}
 	    					int index=dxshi[i].var.indexOf(zan[0]);
-	    					//ÃƒÃÃ”Ã‹Ã‹Ã£
+	    					//ÃİÔËËã
 	    					int ci=1;
 	    					if (zan.length==2)
 	    						ci=Integer.parseInt(zan[1]);
@@ -272,10 +272,10 @@ class Chuli{
 	    					}
     					}
     				}
-    			}    			
+    			}
     		}
     	merge();
-    	}    	
+    	}
     }
     public int mi(int a,int b){
     	int result=1;
@@ -365,7 +365,6 @@ class Chuli{
     		{
     			number+=xishu;
     		}
-    		
     	}    	
     	if (flagfirst==1 && number>0){
     		System.out.print("+");
@@ -397,9 +396,9 @@ class Chuli{
 	    				number+=xishu;
 	    			}
 	    			else{
-						if (flagfirst==0)
-	        				flagfirst=1;        			
-	        			else
+					if (flagfirst==0)
+	        				flagfirst=1;
+	        			else{
 	        				System.out.print("+"); 
 						int first=0;
 						if (xishu*mi!=1 && xishu*mi!=-1)
@@ -409,6 +408,7 @@ class Chuli{
 						}
 						else if (xishu*mi==-1)
 							System.out.print("-");
+					}
 		    			for (int w=0;w<size;w++){
 		    				if (w!=index){
 		        				if(first!=0){
@@ -465,55 +465,55 @@ class Chuli{
 	    	}
     	}
     }
-    public boolean equal(int a,int b){
-    	int sizea=dxshi[a].var.size();
-    	int sizeb=dxshi[b].var.size();
-    	if (sizea!=sizeb)
-    		return false;
-    	else{
-    		int juzhen[][]=new int[2][sizea];
-    		for (int i=0;i<2;i++){
-    			for (int j=0;j<sizea;j++){
-    				juzhen[i][j]=0;
-    			}
-    		}
-    		for (int i=0;i<sizea;i++){
-    			for (int j=0;j<sizeb;j++){
-    				//System.out.println(i+"  "+j);
-    				if(juzhen[0][i]==0 && juzhen[1][j]==0){
-    					if (dxshi[a].var.elementAt(i).equals(dxshi[b].var.elementAt(j))){
-    						if(dxshi[a].mi.elementAt(i).equals(dxshi[b].mi.elementAt(j))){
+	public boolean equal(int a,int b){
+		int sizea=dxshi[a].var.size();
+		int sizeb=dxshi[b].var.size();
+		if (sizea!=sizeb)
+			return false;
+		else{
+			int juzhen[][]=new int[2][sizea];
+			for (int i=0;i<2;i++){
+				for (int j=0;j<sizea;j++){
+					juzhen[i][j]=0;
+				}
+			}
+			for (int i=0;i<sizea;i++){
+				for (int j=0;j<sizeb;j++){
+					//System.out.println(i+"  "+j);
+					if(juzhen[0][i]==0 && juzhen[1][j]==0){
+						if (dxshi[a].var.elementAt(i).equals(dxshi[b].var.elementAt(j))){
+							if(dxshi[a].mi.elementAt(i).equals(dxshi[b].mi.elementAt(j))){
 		    					juzhen[0][i]=1;
 		    					juzhen[1][j]=1; 
 		    				}
-    					}
-    				}
-    			}
-    		}
-    		for (int j=0;j<sizea;j++){
-    			if (juzhen[0][j]==0 || juzhen[1][j]==0)
-    				return false;
+						}
+					}
+				}
 			}
-    	}
-		return true;   	
-    }
+			for (int j=0;j<sizea;j++){
+				if (juzhen[0][j]==0 || juzhen[1][j]==0)
+					return false;
+			}
+		}
+		return true;
+	}
 }
 
 class Xiang{
-	public int xishu=1;
-	public Vector<String> var;
-	public Vector<Integer> mi;
-	public Xiang(){
-		xishu=1;
-		var=new Vector<String>();
-		mi=new Vector<Integer>();
-	}
+  public int xishu=1;
+  public Vector<String> var;
+  public Vector<Integer> mi;
+  public Xiang(){
+	xishu=1;
+	var=new Vector<String>();
+	mi=new Vector<Integer>();
+  }
 }		
 class Fuzhi{
-	public Vector<String> var;
-	public Vector<Integer> zhi;
-	public Fuzhi(){
-		var=new Vector<String>();
-		zhi=new Vector<Integer>();
-	}
+  public Vector<String> var;
+  public Vector<Integer> zhi;
+  public Fuzhi(){
+	var=new Vector<String>();
+	zhi=new Vector<Integer>();
+  }
 }
