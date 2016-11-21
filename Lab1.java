@@ -69,8 +69,6 @@ class Chuli{
       else if(str.startsWith("!d/d ")) {
     	String sub=str.substring(5);
     	if (var.indexOf(sub)==-1 ){
-    	  sub=sub.replaceAll(" ","");
-          sub=sub.replaceAll("	","");
           if (sub.length()==0)
         	return false;
           if (fuhao(sub.charAt(0))!=1)
@@ -82,7 +80,9 @@ class Chuli{
 		  System.out.println(0);
 		}
     	else {
-    	  derivative(sub);
+    		sub=sub.replaceAll("	", "");
+    		sub=sub.replace(" ","");
+    		derivative(sub);
     	}
       }
     }
@@ -390,25 +390,26 @@ class Chuli{
     		else{
     			int xishu=dxshi[i].xishu;
     			int index=dxshi[i].var.indexOf(str);
+    			int first=0;
     			if (xishu!=0){
 	    			int mi=dxshi[i].mi.elementAt(index);
 	    			if (size==1 && mi==1){
 	    				number+=xishu;
 	    			}
 	    			else{
-					if (flagfirst==0)
-	        				flagfirst=1;
-	        			else{
-	        				System.out.print("+"); 
-						int first=0;
-						if (xishu*mi!=1 && xishu*mi!=-1)
-						{
-							System.out.print(xishu*mi);
-							first=1;
+						if (flagfirst==0)
+		        				flagfirst=1;
+		        			else{
+		        				System.out.print("+"); 
+							
+							if (xishu*mi!=1 && xishu*mi!=-1)
+							{
+								System.out.print(xishu*mi);
+								first=1;
+							}
+							else if (xishu*mi==-1)
+								System.out.print("-");
 						}
-						else if (xishu*mi==-1)
-							System.out.print("-");
-					}
 		    			for (int w=0;w<size;w++){
 		    				if (w!=index){
 		        				if(first!=0){
